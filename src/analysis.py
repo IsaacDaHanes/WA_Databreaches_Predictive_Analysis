@@ -50,11 +50,21 @@ def get_bootstrapped_rates(dataframe, startdate, enddate, column, category, samp
    return rates
 
 def rmse(true, predicted):
+   '''
+   Inputs: true values and predicted values for a linear regression model
+
+   outputs: rmse score
+   '''
    mse = np.square(np.subtract(true, predicted)).mean()
    rmse = math.sqrt(mse)
    return rmse
 
 def cross_val(X_train, y_train, k=5):
+   '''
+   Inputs: training data for x and y, and number of folds:default is 5
+
+   Outputs: a list of rmse scores and their mean
+   '''
    kf = KFold(n_splits = k, shuffle=True, random_state = None)
    rmse_list = []
    i = 1
@@ -72,17 +82,24 @@ def cross_val(X_train, y_train, k=5):
    print(f'The mean rmse is: {np.mean(rmse_list)}')
 
 def test_hom_variance(means1, means2):
+   '''
+   Inputs: two sets of data, either original or produced by bootstrapping
 
-   hom_variance = None
+   Outputs: True or False based on homogeneity of variance test
+   '''
    variance_ratio = np.std(means1)/np.std(means2)
    if variance_ratio > 3:
-      hom_variance = False
+      return False
    else:
-      hom_variance = True
-
-   return hom_variance
+      return True
 
 def plot_dist(column, category1, category2, means1, means2, bins1=10, bins2=10, rate='n'):
+   '''
+   Inputs: column, 2 categories, 2 distributions, bins for both distributions, and
+   whether or not the distributions are based on rate.
+
+   Outputs: a saved figure of two distributions
+   '''
    fig,ax = plt.subplots()
    ax.hist(means1, bins=bins1, color='orange')
    ax.hist(means2, bins=bins2, color='green')
@@ -139,6 +156,12 @@ def hypothesis_test(dataframe, column, category1, category2, samples=10000, star
       return st.ttest_ind(cat1_rates, cat2_rates, equal_var=hom_variance, alternative=alt)
 
 def plot_years(dataframe):
+   '''
+   Inputs: Washington databreach dataframe
+
+   Outputs: 3 saved figures displaying number affected, number of incidents, and
+            rate over time.
+   '''
    grouped_years = dataframe[['ActualYears', 'WashingtoniansAffected']].groupby('ActualYears')
    num_affected = grouped_years.sum()
    num_incidents = grouped_years.count()
@@ -171,6 +194,11 @@ def plot_years(dataframe):
    return
 
 def seasons(dataframe):
+    '''
+    Inputs: Wa databreach dataframe
+
+    Outputs: saved figure pieplot of breaches by season(percentage)
+    '''
     grouped_seasons = dataframe[['Season','WashingtoniansAffected']].groupby('Season')
     grouped_seasons.sum()
     grouped_seasons.sum()['WashingtoniansAffected']
@@ -180,6 +208,11 @@ def seasons(dataframe):
     fig.savefig(f'../images/seasons', bbox_inches='tight')
 
 def create_display_model(dataframe):
+   '''
+   Inputs: Wa databreach dataframe
+
+   Outputs: a saved figure object plotting the performance of predictive model
+   '''
    # getting relevant info
    grouped_years = dataframe[['ActualYears', 'WashingtoniansAffected']].groupby('ActualYears')
    # y
