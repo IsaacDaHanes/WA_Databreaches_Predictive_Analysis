@@ -13,6 +13,7 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
+import seaborn as sns
 
 def bootstrap(data, num_bootstrap_samples=10000):
    '''
@@ -177,3 +178,31 @@ def seasons(dataframe):
     fig, ax = plt.subplots()
     ax.pie(grouped_seasons.sum()['WashingtoniansAffected'], labels=grouped_seasons.sum()['WashingtoniansAffected'].index, autopct='%1.1f%%')
     fig.savefig(f'../images/seasons', bbox_inches='tight')
+
+def create_display_model(dataframe):
+   # getting relevant info
+   grouped_years = dataframe[['ActualYears', 'WashingtoniansAffected']].groupby('ActualYears')
+   # y
+   num_affected = grouped_years.sum()
+   # X
+   num_incidents = grouped_years.count()
+   num_incidents['Number Of Incidents'] = num_incidents['WashingtoniansAffected']
+   num_incidents.drop('WashingtoniansAffected', axis=1, inplace=True)
+   # declaring X and y for model
+   X = num_incidents['Number Of Incidents']
+   y = num_affected['WashingtoniansAffected']
+   # train/test split
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.05)
+   # creating model
+   model = LinearRegression()
+   model.fit(X_train,y_train)
+   # put data back together for display
+   num_affected['Num_incidents'] = num_incidents['Number Of Incidents']
+   # display model
+   # create fig, ax object and set ax to the regplot to allow saving
+   fig, ax = plt.subplots()
+   model_display = sns.regplot(data = num_affected, x='Num_incidents', y='WashingtoniansAffected', x_estimator=model)
+   ax = model_display
+   ax.set_title('Model Performance')
+   # save
+   fig.savefig('../images/model')
