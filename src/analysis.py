@@ -221,20 +221,12 @@ def create_display_model(dataframe):
    num_incidents = grouped_years.count()
    num_incidents['Number Of Incidents'] = num_incidents['WashingtoniansAffected']
    num_incidents.drop('WashingtoniansAffected', axis=1, inplace=True)
-   # declaring X and y for model
-   X = num_incidents['Number Of Incidents']
-   y = num_affected['WashingtoniansAffected']
-   # train/test split
-   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.05)
-   # creating model
-   model = LinearRegression()
-   model.fit(X_train,y_train)
    # put data back together for display
    num_affected['Num_incidents'] = num_incidents['Number Of Incidents']
    # display model
    # create fig, ax object and set ax to the regplot to allow saving
    fig, ax = plt.subplots()
-   model_display = sns.regplot(data = num_affected, x='Num_incidents', y='WashingtoniansAffected', x_estimator=model)
+   model_display = sns.regplot(data = num_affected, x='Num_incidents', y='WashingtoniansAffected')
    ax = model_display
    ax.set_title('Model Performance')
    # save
