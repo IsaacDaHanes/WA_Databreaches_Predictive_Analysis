@@ -81,17 +81,17 @@ def test_hom_variance(means1, means2):
 
    return hom_variance
 
-def plot_dist(category1, category2, means1, means2, bins1=10, bins2=10):
+def plot_dist(column, category1, category2, means1, means2, bins1=10, bins2=10, rate='n'):
    fig,ax = plt.subplots()
-
    ax.hist(means1, bins=bins1, color='orange')
    ax.hist(means2, bins=bins2, color='green')
-
    ax.set_xlabel('Number affected')
    ax.set_ylabel('Samples')
    ax.legend([category1, category2])
-
-   fig.savefig(f'../images/hypoth_test:{category1}&{category2}(individual)', bbox_inches='tight')
+   if rate == 'n':
+      fig.savefig(f'../images/{column}_hypothtest', bbox_inches='tight')
+   else:
+      fig.savefig(f'../images/{column}_rate_hypothtest', bbox_inches='tight')
 
 def hypothesis_test(dataframe, column, category1, category2, samples=10000, startdate = None, enddate=None, rate='n', alt='two-sided'):
 
@@ -123,7 +123,7 @@ def hypothesis_test(dataframe, column, category1, category2, samples=10000, star
   
       hom_variance = test_hom_variance(boot_cat1_means, boot_cat2_means)
 
-      plot_dist(category1, category2, boot_cat1_means, boot_cat2_means)
+      plot_dist(column, category1, category2, boot_cat1_means, boot_cat2_means, rate=rate)
 
       return st.ttest_ind(boot_cat1_means, boot_cat2_means, equal_var=hom_variance, alternative=alt)
 
@@ -133,11 +133,11 @@ def hypothesis_test(dataframe, column, category1, category2, samples=10000, star
 
       hom_variance = test_hom_variance(cat1_rates, cat2_rates)
 
-      plot_dist(category1, category2, cat1_rates, cat2_rates)
+      plot_dist(column, category1, category2, cat1_rates, cat2_rates, rate=rate)
 
       return st.ttest_ind(cat1_rates, cat2_rates, equal_var=hom_variance, alternative=alt)
 
-def linear_regression(dataframe):
+def plot_years(dataframe):
    grouped_years = dataframe[['ActualYears', 'WashingtoniansAffected']].groupby('ActualYears')
    num_affected = grouped_years.sum()
    num_incidents = grouped_years.count()
@@ -167,15 +167,7 @@ def linear_regression(dataframe):
    ax.set_xlabel('Years')
    fig.savefig(f'../images/ratesbyyear', bbox_inches='tight')
 
-   X = num_incidents['Number Of Incidents']
-   y = num_affected['WashingtoniansAffected']
-
-   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.05)
-
-   model = LinearRegression()
-   model.fit(X_train,y_train)
-
-   return model
+   return
 
 def seasons(dataframe):
     grouped_seasons = dataframe[['Season','WashingtoniansAffected']].groupby('Season')
