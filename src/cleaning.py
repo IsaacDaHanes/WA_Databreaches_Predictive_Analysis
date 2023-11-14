@@ -31,6 +31,22 @@ def to_datetime_date_helpfunction(dataframe):
             dataframe[f'{x}'] = pd.to_datetime(dataframe[f'{x}']).dt.date
     return
 
+def to_season(date):
+    '''
+    Inputs: datetime.date object
+
+    Outputs: Name of season that month of date is in. (str)
+    '''
+    winter = ['Winter', 12, 1, 2]
+    spring = ['Spring', 3, 4, 5]
+    summer = ['Summer', 6, 7, 8]
+    fall = ['Fall', 9, 10, 11]
+    seasons = [winter, spring, summer, fall]
+    for season in seasons:
+        for month in season:
+            if date.month == month:
+                return season[0]
+            
 def use_dataframe(filepath):
     '''
     Inputs: filepath
@@ -49,6 +65,10 @@ def use_dataframe(filepath):
                                                 & (cleandf['CyberattackType'].isnull())] = 'Unreported'
     # enact datetime adjustments
     to_datetime_date_helpfunction(cleandf)
+    # add usable(non-fiscal) years column
+    cleandf['ActualYears'] = [x.year for x in cleandf['DateStart']]
+    # add seasons column
+    cleandf['Season'] = cleandf['DateStart'].apply(to_season)
 
     return cleandf
 
