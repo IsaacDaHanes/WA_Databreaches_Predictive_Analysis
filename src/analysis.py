@@ -229,6 +229,7 @@ def create_display_model(dataframe):
    model_display = sns.regplot(data = num_affected, x='Num_incidents', y='WashingtoniansAffected')
    ax = model_display
    ax.set_title('Model Performance')
+   ax.set_ylabel('Washingtonians Affected(millions)')
    # save
    fig.savefig('../images/model')
 
