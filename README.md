@@ -110,14 +110,62 @@ The model will take a number of incidents for a given year, and predict the tota
 
 ### Model Performance
 
+<p align="left">
+  <img src="images/model.png" width = 800 height = 250>
+</p>
+
+The thin blue line represents the average of predictions, while the pale blue swath represents the 95% confidence interval. 95% of predictions will end up within the pale blue swath. The blue dots represent the actual data. As you can see there are some discrepancies, but the model seems to do well given limited training and will serve to provide general estimates for yearly reporting.
+
 ## Hypothesis Testing
+Turning to more directly actionable and informative conclusions I have conducted using a tailored method. My goal here is to use comparisons to indicate where resources and attention should be directed in order to reduce the number of affected people for a given period of time.
+
+Again, this is an analysis that is designed to grow and expand, encompassing all of the other categories, serving as an example of what can be achieved, and a foundation for where to start looking when answering questions like the ones postulated by my goal.
 
 ### Gov vs. Non-Profit/Charity(individual)
 
+H0: Government mean affected <= Non-Profit/Charity mean affected
+
+H1: Government mean affected > Non-Profit/Charity mean affected
+
+Test Method: Welch’s T-test
+
+<p align="left">
+  <img src="images/IndustryType_hypothtest.png" width = 800 height = 250>
+</p>
+
+Outcome: Ttest_indResult(statistic=87.55192970511973, pvalue=0.0) Reject the null hypothesis in favor of the alternative.
+
+The image above shows a distribution of mean number affected from a bootstrap of 10000 samples. Showing that Government databases, given a single breach are far more likely to affect far more people.
+
 ### Gov vs. Non-Profit/Charity(over time)
+
+H0: Government mean rate >= Non-Profit/Charity mean rate
+
+H1: Government mean rate < Non-Profit/Charity mean rate
+
+Time period: Jan 1, 2018 - Dec 30, 2023
+
+<p align="left">
+  <img src="images/IndustryType_rate_hypothtest.png" width = 800 height = 250>
+</p>
+
+Outcome: Ttest_indResult(statistic=-251.21144192672983, pvalue=0.0) Reject the null hypothesis in favor of the alternative.
+
+The image above shows a distribution of mean rates for the given period of time.(10000 samples) Showing that despite the fact that an individual breach on a Government database will result in more people being affected, breaches on Non-Profit/Charity databases happen far more often. Therefore time is an important factor when considering the effects of breaches on the public.
 
 ## Conlusion
 
 ### The Future
+As I've stated a few times, this database and the work I've done, given time, will result in a more robust and extremely useful set of information and analysis. But that's just it, time. It is an important factor, and time in this case is an investment. It's an investment that deserves time, funds, and attention due to the sensitive nature. As technology grows so will the exploits to meet it.
 
 ### For You
+My email: isaacdhanes97@gmail.com  
+Database: https://data.wa.gov/Consumer-Protection/Data-Breach-Notifications-Affecting-Washington-Res/sb4j-ca4h  
+
+Tools Used:  
+Python(Pandas, SciPy, Numpy, SkLearn, Matplotlib, and more)  
+Jupyter Notebooks  
+Github  
+VSCode
+
+My work can be found within the repository, including .py files for handling the data and producing the information. Several of the functions can be used to explore other categories. The images are cointained in "images", and the notebooks for exploration and testing can be found in "notebooks".
