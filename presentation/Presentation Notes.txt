@@ -1,0 +1,50 @@
+Title - Members of the board, stockholders, partners and piers.
+	Isaac Hanes.
+	Cybersecurity in Washington State
+	Have received questions: how to save money? how to save time? How to cut losses?
+	most important; where to bolster defenses?
+	Saves money AND time by saving people, less to clean up
+	This presentation is the budding answer to that question
+
+Data - Highlights: Year column(fiscal year of when report was made)
+		   YearText(rendundant)
+		   BreachLifecycleRange(categorical ranges)
+		   A lot of fluff
+		   More in README
+
+Predictive/Inferential - Not succesful Predictors for number affected due to variation
+			 Other data is needed: security level and size of organization
+			 Over time this data could be added
+			 Time will be a very important theme moving forwards
+
+Seasons - Through thoughtful analysis can provide meaningful info in other ways
+
+Years - correlation and trend
+
+Rate - Spike shows specific growth in attack tech
+       Back and forth shows relationship between attack and defense: repartee, a sort of banter.
+
+Model - when reports are made, number affected usually isn't available for a while
+	end of year summary predictions
+	could in the future be used to predict numbers in the following years
+	average line
+	95% of data ends up in blue swath
+
+Gov vs. nonprof 1 - thousands of resamples, majority of the time in the middle. Same in the following slide
+
+Gov vs. nonprof 2 - When time is introduced see how they switch places
+		    Numbers are per day
+		    Given time, the truth reveals itself
+
+Conclusion - Ransomware is the biggest threat(not in presentation, but is in notebooks and previous explorations)
+	     Given time other relationships could be tested
+	     Save time by investing time
+	     Save money by investing money
+	     Invest in this database
+	     Invest in this analysis
+
+End - My information
+      More thorough exploration can be found in repository
+      Offers the ability to expand
+      Thank you for your time
+      Questions?
