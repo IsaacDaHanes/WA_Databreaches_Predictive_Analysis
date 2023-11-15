@@ -63,7 +63,7 @@ Additionally I transformed the date columns to dt.datetime objects to enable eff
 ---
 
 <p align="left">
-  <img src="images/seasons.png" width = 800 height = 250>
+  <img src="images/seasons.png" width = 400 height = 250>
 </p>
 
 Due to the additon of the seasons column I have been able to infer that Winter is a season of increased activity. With some outside research the phenomenon is easily explained: “The Federal Bureau of Investigation (FBI) and the Cybersecurity and Infrastructure Security Agency (CISA) have observed an increase in highly impactful ransomware attacks occurring on holidays and weekends.”
@@ -73,18 +73,18 @@ Due to the additon of the seasons column I have been able to infer that Winter i
 
 With the addition of the ActualYears column I have also been succesful in deriving further useful information: the basis of my predictive model.
 <p align="left">
-  <img src="images/incidentsbyyear.png" width = 800 height = 250>
+  <img src="images/incidentsbyyear.png" width = 400 height = 250>
 </p>
 
 <p align="left">
-  <img src="images/affectedbyyear.png" width = 800 height = 250>
+  <img src="images/affectedbyyear.png" width = 400 height = 250>
 </p>
 We can see here a general upwards trend in both the number of incidents and the number of people affected each year. Also observe the relationship between the two. Sensibly enough, as the number of incidents goes up, so does the number of people affected, and visa versa.
 
 ---
 
 <p align="left">
-  <img src="images/ratesbyyear.png" width = 800 height = 250>
+  <img src="images/ratesbyyear.png" width = 400 height = 250>
 </p>
 
 By dividing the number affected per year, by the number of incidents per year we get a rate: Number of people affected per incident per year.
@@ -111,7 +111,7 @@ The model will take a number of incidents for a given year, and predict the tota
 ### Model Performance
 
 <p align="left">
-  <img src="images/model.png" width = 800 height = 250>
+  <img src="images/model.png" width = 400 height = 250>
 </p>
 
 The thin blue line represents the average of predictions, while the pale blue swath represents the 95% confidence interval. 95% of predictions will end up within the pale blue swath. The blue dots represent the actual data. As you can see there are some discrepancies, but the model seems to do well given limited training and will serve to provide general estimates for yearly reporting.
@@ -130,7 +130,7 @@ H1: Government mean affected > Non-Profit/Charity mean affected
 Test Method: Welch’s T-test
 
 <p align="left">
-  <img src="images/IndustryType_hypothtest.png" width = 800 height = 250>
+  <img src="images/IndustryType_hypothtest.png" width = 400 height = 250>
 </p>
 
 Outcome: Ttest_indResult(statistic=87.55192970511973, pvalue=0.0) Reject the null hypothesis in favor of the alternative.
@@ -146,7 +146,7 @@ H1: Government mean rate < Non-Profit/Charity mean rate
 Time period: Jan 1, 2018 - Dec 30, 2023
 
 <p align="left">
-  <img src="images/IndustryType_rate_hypothtest.png" width = 800 height = 250>
+  <img src="images/IndustryType_rate_hypothtest.png" width = 400 height = 250>
 </p>
 
 Outcome: Ttest_indResult(statistic=-251.21144192672983, pvalue=0.0) Reject the null hypothesis in favor of the alternative.
