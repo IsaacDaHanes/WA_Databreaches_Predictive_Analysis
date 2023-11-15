@@ -231,3 +231,17 @@ def create_display_model(dataframe):
    ax.set_title('Model Performance')
    # save
    fig.savefig('../images/model')
+
+
+if __name__ == "__main__":
+   
+   filepath = '../data/WA_Databreach_20231102.csv'
+   cleandf = use_dataframe(filepath)
+
+   hypothesis_test(cleandf, 'IndustryType', 'Government', 'Non-Profit/Charity', samples=10000, startdate = None, enddate=None, rate='n', alt='greater')
+   start = dt.date(2018,1,1)
+   end = dt.date(2023,12,30)
+   hypothesis_test(cleandf, 'IndustryType', 'Government', 'Non-Profit/Charity', samples=10000, startdate = start, enddate= end, rate='y', alt='less')
+   create_display_model(cleandf)
+   plot_years(cleandf)
+   seasons(cleandf)
