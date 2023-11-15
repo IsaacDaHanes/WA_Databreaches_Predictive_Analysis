@@ -63,7 +63,7 @@ Additionally I transformed the date columns to dt.datetime objects to enable eff
 ---
 
 <p align="left">
-  <img src="images/seasons.png" width = 400 height = 250>
+  <img src="images/seasons.png" width = 400 height = 350>
 </p>
 
 Due to the additon of the seasons column I have been able to infer that Winter is a season of increased activity. With some outside research the phenomenon is easily explained: “The Federal Bureau of Investigation (FBI) and the Cybersecurity and Infrastructure Security Agency (CISA) have observed an increase in highly impactful ransomware attacks occurring on holidays and weekends.”
